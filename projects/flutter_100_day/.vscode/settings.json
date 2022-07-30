@@ -1,0 +1,10 @@
+{
+  "yaml.schemas": {
+    "https://json.schemastore.org/yamllint.json": "file:///Users/ben/Documents/workspace/learn/flutter_100_day/build.yaml"
+  },
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true,
+    "source.fixAll": true
+  },
+  "cSpell.words": ["dotenv"]
+}

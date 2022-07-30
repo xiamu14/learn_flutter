@@ -1,0 +1,8 @@
+query QueryCountries {
+  countries {
+    code
+    name
+    emoji
+    native
+  }
+}
