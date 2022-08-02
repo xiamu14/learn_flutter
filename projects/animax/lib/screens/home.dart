@@ -20,7 +20,7 @@ class Home extends StatelessWidget {
             child: Column(
               children: [
                 //  header banner
-                const HeadBanner(),
+                const HomeHeadBanner(),
                 Expanded(
                   child: MediaQuery.removePadding(
                     removeTop: true,

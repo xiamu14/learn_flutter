@@ -38,6 +38,10 @@ class AppWithRoutes extends StatelessWidget {
         builder: ((context, state) => const Home()),
       ),
       GoRoute(
+        path: AnimeDetail.routePath,
+        builder: ((context, state) => const AnimeDetail()),
+      ),
+      GoRoute(
         path: AnimePlayer.routePath,
         builder: ((context, state) => const AnimePlayer(
               videoUrl:
@@ -45,6 +49,6 @@ class AppWithRoutes extends StatelessWidget {
             )),
       ),
     ],
-    initialLocation: Home.routePath,
+    initialLocation: AnimeDetail.routePath,
   );
 }

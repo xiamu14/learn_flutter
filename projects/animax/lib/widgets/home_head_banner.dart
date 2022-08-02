@@ -1,10 +1,11 @@
+import 'package:animax/screens/detail.dart';
 import 'package:animax/screens/player.dart';
 import 'package:anime_icons/anime_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class HeadBanner extends StatelessWidget {
-  const HeadBanner({Key? key}) : super(key: key);
+class HomeHeadBanner extends StatelessWidget {
+  const HomeHeadBanner({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -96,41 +97,7 @@ class HeadBanner extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                            GoRouter.of(context).push(AnimePlayer.routePath);
-                          },
-                          child: Container(
-                            // width: 84,
-                            height: 32,
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).primaryColor,
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 12.0),
-                              child: Center(
-                                child: Row(
-                                  children: const [
-                                    AnimeIcon(
-                                      AnimeIcons.playBold,
-                                      color: Colors.white,
-                                      size: 16,
-                                    ),
-                                    SizedBox(width: 6),
-                                    Text(
-                                      'Play',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        const ButtonPlay(),
                         const SizedBox(width: 12),
                         GestureDetector(
                           onTap: () {},
@@ -163,6 +130,50 @@ class HeadBanner extends StatelessWidget {
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class ButtonPlay extends StatelessWidget {
+  const ButtonPlay({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        GoRouter.of(context).push(AnimeDetail.routePath);
+      },
+      child: Container(
+        // width: 84,
+        height: 32,
+        decoration: BoxDecoration(
+          color: Theme.of(context).primaryColor,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          child: Center(
+            child: Row(
+              children: const [
+                AnimeIcon(
+                  AnimeIcons.playBold,
+                  color: Colors.white,
+                  size: 16,
+                ),
+                SizedBox(width: 6),
+                Text(
+                  'Play',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

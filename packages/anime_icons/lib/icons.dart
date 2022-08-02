@@ -30,5 +30,15 @@ class AnimeIcons {
   static const notification = AnimeIcons._('Notification');
 
   static const play = AnimeIcons._('Play');
+
   static const playBold = AnimeIcons._('Bold_Play');
+
+  static const send = AnimeIcons._('Send');
+
+  static const star = AnimeIcons._('Star');
+  static const starBold = AnimeIcons._('Bold_Star');
+
+  static const arrowLeft = AnimeIcons._('Arrow_Left');
+
+  static const arrowRight = AnimeIcons._('Arrow_Right');
 }
