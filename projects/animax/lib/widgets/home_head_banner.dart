@@ -25,11 +25,12 @@ class HomeHeadBanner extends StatelessWidget {
             width: sw,
             height: sh * 0.12,
             decoration: const BoxDecoration(
-                gradient: LinearGradient(
-              colors: [Color(0xff181a20), Color.fromRGBO(24, 26, 0, 0)],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            )),
+              gradient: LinearGradient(
+                colors: [Color(0xff181a20), Color.fromRGBO(24, 26, 0, 0)],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
             child: Align(
               alignment: const Alignment(0, 0.65),
               child: Padding(

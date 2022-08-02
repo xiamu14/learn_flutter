@@ -41,4 +41,8 @@ class AnimeIcons {
   static const arrowLeft = AnimeIcons._('Arrow_Left');
 
   static const arrowRight = AnimeIcons._('Arrow_Right');
+
+  static const moreCircle = AnimeIcons._('More_Circle');
+
+  static const heartBold = AnimeIcons._('Bold_Heart');
 }

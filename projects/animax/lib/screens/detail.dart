@@ -1,10 +1,14 @@
 import 'package:animax/widgets/button.dart';
+import 'package:animax/widgets/detail_tab_view.dart';
+import 'package:animax/widgets/episode_card_list.dart';
 import 'package:animax/widgets/tag.dart';
 import 'package:anime_icons/anime_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:ui' as ui;
+
+import 'package:readmore/readmore.dart';
 
 class AnimeDetail extends StatelessWidget {
   const AnimeDetail({Key? key}) : super(key: key);
@@ -131,7 +135,39 @@ class AnimeDetail extends StatelessWidget {
                           color: Theme.of(context).primaryColor,
                         ),
                       ],
-                    )
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                        'Genre: Action, Martial Arts, Adventure, Dark Fantasy, Thriller.'),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    ReadMoreText(
+                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat... ',
+                      trimLines: 3,
+                      colorClickableText: Theme.of(context).primaryColor,
+                      trimMode: TrimMode.Line,
+                      trimCollapsedText: 'View More',
+                      trimExpandedText: 'Show Less',
+                      lessStyle: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).primaryColor),
+                      moreStyle: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).primaryColor),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const EpisodeCardList(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const DetailTabView(),
                     // introduction
                   ]),
                 ),
