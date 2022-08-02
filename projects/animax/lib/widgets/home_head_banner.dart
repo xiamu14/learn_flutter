@@ -1,4 +1,4 @@
-import 'package:animax/screens/detail.dart';
+import 'package:animax/screens/player.dart';
 import 'package:anime_icons/anime_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -22,7 +22,7 @@ class HeadBanner extends StatelessWidget {
         children: [
           Container(
             width: sw,
-            height: sh * 0.13,
+            height: sh * 0.12,
             decoration: const BoxDecoration(
                 gradient: LinearGradient(
               colors: [Color(0xff181a20), Color.fromRGBO(24, 26, 0, 0)],
@@ -98,7 +98,7 @@ class HeadBanner extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            GoRouter.of(context).go(AnimeDetail.routePath);
+                            GoRouter.of(context).push(AnimePlayer.routePath);
                           },
                           child: Container(
                             // width: 84,
