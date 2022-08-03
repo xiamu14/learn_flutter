@@ -1,5 +1,6 @@
 import 'package:anime_icons/anime_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Button extends StatelessWidget {
   const Button({
@@ -7,17 +8,17 @@ class Button extends StatelessWidget {
     this.solid = true,
     this.width,
     this.height = 38,
+    this.icon,
+    required this.color,
     required this.onTap,
     required this.text,
-    required this.icon,
-    required this.color,
   }) : super(key: key);
 
   final void Function() onTap;
   final String text;
   final Color color;
-  final AnimeIcons icon;
-  final double? height;
+  final AnimeIcons? icon;
+  final double height;
   final double? width;
   final bool solid;
 
@@ -32,7 +33,7 @@ class Button extends StatelessWidget {
         height: height,
         decoration: BoxDecoration(
             color: bgColor,
-            borderRadius: BorderRadius.circular(height! / 2),
+            borderRadius: BorderRadius.circular(height / 2),
             border: Border.all(
                 color: solid ? Colors.transparent : color, width: 2)),
         child: Padding(
@@ -40,15 +41,19 @@ class Button extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              AnimeIcon(
-                icon,
-                color: contentColor,
-              ),
+              icon != null
+                  ? AnimeIcon(
+                      icon!,
+                      color: contentColor,
+                    )
+                  : Container(),
               const SizedBox(width: 6),
               Text(
                 text,
-                style:
-                    TextStyle(color: contentColor, fontWeight: FontWeight.bold),
+                style: GoogleFonts.urbanist(
+                  textStyle: TextStyle(
+                      color: contentColor, fontWeight: FontWeight.bold),
+                ),
               ),
             ],
           ),

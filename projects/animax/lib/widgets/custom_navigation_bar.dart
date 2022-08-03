@@ -1,7 +1,10 @@
 import 'dart:ui';
 
+import 'package:animax/screens/home.dart';
+import 'package:animax/screens/profile.dart';
 import 'package:anime_icons/anime_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomNavigationBar extends StatefulWidget {
   const CustomNavigationBar({Key? key}) : super(key: key);
@@ -13,7 +16,13 @@ class CustomNavigationBar extends StatefulWidget {
 class _CustomNavigationBarState extends State<CustomNavigationBar> {
   int _navCurrentIndex = 0;
 
-  void onTapNavItem(int index) {
+  void onTapNavItem(BuildContext context, int index) {
+    if (index == 0) {
+      GoRouter.of(context).go(Home.routePath);
+    }
+    if (index == 4) {
+      GoRouter.of(context).go(Profile.routePath);
+    }
     setState(() {
       _navCurrentIndex = index;
     });
@@ -21,6 +30,8 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
+    final router = GoRouter.of(context);
+    final currentIndex = router.location == Profile.routePath ? 4 : 0;
     return Stack(
       children: [
         Positioned.fill(
@@ -35,8 +46,10 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
         ),
         BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          onTap: onTapNavItem,
-          currentIndex: _navCurrentIndex,
+          onTap: (value) {
+            onTapNavItem(context, value);
+          },
+          currentIndex: currentIndex,
           selectedItemColor: Theme.of(context).primaryColor,
           unselectedItemColor: const Color(0xff9E9E9E),
           selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),

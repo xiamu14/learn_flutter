@@ -2,6 +2,7 @@ import 'package:animax/widgets/button.dart';
 import 'package:animax/widgets/detail_tab_view.dart';
 import 'package:animax/widgets/episode_card_list.dart';
 import 'package:animax/widgets/tag.dart';
+import 'package:anime_api/api/anime.dart';
 import 'package:anime_icons/anime_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,10 +11,24 @@ import 'dart:ui' as ui;
 
 import 'package:readmore/readmore.dart';
 
-class AnimeDetail extends StatelessWidget {
+class AnimeDetail extends StatefulWidget {
   const AnimeDetail({Key? key}) : super(key: key);
 
   static String routePath = '/animeDetail';
+
+  @override
+  State<AnimeDetail> createState() => _AnimeDetailState();
+}
+
+class _AnimeDetailState extends State<AnimeDetail> {
+  @override
+  void initState() {
+    super.initState();
+    AnimeApi.getAnimeById(1).then((value) {
+      print(value.episodes.length);
+      value.episodes.forEach(print);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
