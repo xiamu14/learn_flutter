@@ -40,7 +40,7 @@ class HomeView extends StatelessWidget {
             ),
           ),
           BottomAppBar(
-            notchMargin: 0,
+            // notchMargin: 0,
             shape: const CircularNotchedRectangle(),
             child: SizedBox(
               height: h * 0.08,

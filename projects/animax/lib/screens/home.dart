@@ -19,7 +19,6 @@ class Home extends StatelessWidget {
           Expanded(
             child: MediaQuery.removePadding(
               removeTop: true,
-              removeBottom: true,
               context: context,
               child: ListView(
                 children: const [

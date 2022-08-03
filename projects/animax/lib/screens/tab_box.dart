@@ -85,14 +85,18 @@ class _TabBoxState extends State<TabBox> {
     return AnnotatedRegion(
       value: tabs[_navCurrentIndex].overlayStyle,
       child: Scaffold(
-        body: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 300),
-          reverseDuration: const Duration(milliseconds: 0),
-          child: _screen,
-        ),
-        bottomNavigationBar: NavigationBar(
-          currentIndex: _navCurrentIndex,
-          onTapNavItem: onTapNavItem,
+        body: Stack(
+          children: [
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              reverseDuration: const Duration(milliseconds: 0),
+              child: _screen,
+            ),
+            NavigationBar(
+              currentIndex: _navCurrentIndex,
+              onTapNavItem: onTapNavItem,
+            ),
+          ],
         ),
       ),
     );
@@ -111,54 +115,52 @@ class NavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Positioned.fill(
-          // ?? 磨砂效果没有出现
-          bottom: 0,
-          child: ClipRect(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-              child: Container(),
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: ClipRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: Opacity(
+            opacity: 0.8,
+            child: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              onTap: onTapNavItem,
+              currentIndex: currentIndex,
+              // backgroundColor: Colors.transparent,
+              selectedItemColor: Theme.of(context).primaryColor,
+              unselectedItemColor: const Color(0xff9E9E9E),
+              selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: AnimeIcon(AnimeIcons.home),
+                  activeIcon: AnimeIcon(AnimeIcons.homeBold),
+                  label: 'Home',
+                ),
+                BottomNavigationBarItem(
+                  icon: AnimeIcon(AnimeIcons.calendar),
+                  activeIcon: AnimeIcon(AnimeIcons.calendarBold),
+                  label: 'Release Calendar',
+                ),
+                BottomNavigationBarItem(
+                  icon: AnimeIcon(AnimeIcons.bookmark),
+                  activeIcon: AnimeIcon(AnimeIcons.bookmarkBold),
+                  label: 'My List',
+                ),
+                BottomNavigationBarItem(
+                  icon: AnimeIcon(AnimeIcons.download),
+                  activeIcon: AnimeIcon(AnimeIcons.downloadBold),
+                  label: 'Download',
+                ),
+                BottomNavigationBarItem(
+                  icon: AnimeIcon(AnimeIcons.profile),
+                  activeIcon: AnimeIcon(AnimeIcons.profileBold),
+                  label: 'Profile',
+                ),
+              ],
             ),
           ),
         ),
-        BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          onTap: onTapNavItem,
-          currentIndex: currentIndex,
-          selectedItemColor: Theme.of(context).primaryColor,
-          unselectedItemColor: const Color(0xff9E9E9E),
-          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: AnimeIcon(AnimeIcons.home),
-              activeIcon: AnimeIcon(AnimeIcons.homeBold),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: AnimeIcon(AnimeIcons.calendar),
-              activeIcon: AnimeIcon(AnimeIcons.calendarBold),
-              label: 'Release Calendar',
-            ),
-            BottomNavigationBarItem(
-              icon: AnimeIcon(AnimeIcons.bookmark),
-              activeIcon: AnimeIcon(AnimeIcons.bookmarkBold),
-              label: 'My List',
-            ),
-            BottomNavigationBarItem(
-              icon: AnimeIcon(AnimeIcons.download),
-              activeIcon: AnimeIcon(AnimeIcons.downloadBold),
-              label: 'Download',
-            ),
-            BottomNavigationBarItem(
-              icon: AnimeIcon(AnimeIcons.profile),
-              activeIcon: AnimeIcon(AnimeIcons.profileBold),
-              label: 'Profile',
-            ),
-          ],
-        ),
-      ],
+      ),
     );
   }
 }
