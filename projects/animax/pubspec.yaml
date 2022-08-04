@@ -46,6 +46,7 @@ dependencies:
   readmore: ^2.2.0
   contained_tab_bar_view: ^0.8.0
   dio: ^4.0.6
+  date_utils: ^0.2.0
 
 dev_dependencies:
   flutter_test:
