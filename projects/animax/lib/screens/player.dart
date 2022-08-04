@@ -2,7 +2,6 @@ import 'package:animax/screens/home.dart';
 import 'package:animax/utils/format_duration.dart';
 import 'package:auto_orientation/auto_orientation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:video_player/video_player.dart';
 

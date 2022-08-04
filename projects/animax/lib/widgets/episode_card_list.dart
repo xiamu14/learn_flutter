@@ -1,8 +1,11 @@
+import 'package:anime_api/model/anime.dart';
 import 'package:anime_icons/anime_icons.dart';
 import 'package:flutter/material.dart';
 
 class EpisodeCardList extends StatelessWidget {
-  const EpisodeCardList({Key? key}) : super(key: key);
+  const EpisodeCardList({Key? key, required this.list}) : super(key: key);
+
+  final List<Episode> list;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +28,7 @@ class EpisodeCardList extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  'Season 3',
+                  'Season ${list.length}',
                   style: TextStyle(
                     color: Theme.of(context).primaryColor,
                     fontSize: 14,
@@ -49,7 +52,7 @@ class EpisodeCardList extends StatelessWidget {
         width: sw,
         height: 112,
         child: ListView.builder(
-            itemCount: 3,
+            itemCount: list.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: ((context, index) {
               return Row(
@@ -61,8 +64,7 @@ class EpisodeCardList extends StatelessWidget {
                       // border: Border.all(color: Colors.red),
                       borderRadius: BorderRadius.circular(8),
                       image: DecorationImage(
-                        image:
-                            AssetImage('assets/poster/00${index + 1}_1.jpeg'),
+                        image: AssetImage('assets/poster/001_1.jpeg'),
                         fit: BoxFit.cover,
                       ),
                     ),
