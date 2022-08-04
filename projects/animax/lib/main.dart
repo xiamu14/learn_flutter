@@ -1,6 +1,5 @@
 import 'package:animax/screens/detail.dart';
 import 'package:animax/screens/episode_release.dart';
-import 'package:animax/screens/home.dart';
 import 'package:animax/screens/player.dart';
 import 'package:animax/screens/profile.dart';
 import 'package:animax/screens/tab_box.dart';
@@ -38,7 +37,8 @@ class AppWithRoutes extends StatelessWidget {
         builder: ((context, state) => const Welcome()),
       ),
       GoRoute(
-        path: '/:screen(tabHome|tabProfile)', // don't dynamic
+        path:
+            '/:screen(tabHome|tabProfile|tabMyList|tabDownload|tabReleaseCalendar)', // don't dynamic
         builder: (BuildContext context, GoRouterState state) {
           final String screen = state.params['screen']!;
           return TabBox(screen: screen);

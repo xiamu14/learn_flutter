@@ -1,7 +1,10 @@
 import 'dart:ui';
 
+import 'package:animax/screens/download.dart';
 import 'package:animax/screens/home.dart';
+import 'package:animax/screens/my_list.dart';
 import 'package:animax/screens/profile.dart';
+import 'package:animax/screens/release_calendar.dart';
 import 'package:anime_icons/anime_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,19 +28,19 @@ final List<TabItem> tabs = [
     overlayStyle: SystemUiOverlayStyle.light,
   ),
   TabItem(
-    screenWidget: const Home(),
-    routePath: '/tabRelease',
-    overlayStyle: SystemUiOverlayStyle.light,
+    screenWidget: const ReleaseCalendar(),
+    routePath: ReleaseCalendar.routePath,
+    overlayStyle: SystemUiOverlayStyle.dark,
   ),
   TabItem(
-    screenWidget: const Home(),
-    routePath: '/tabMyList',
-    overlayStyle: SystemUiOverlayStyle.light,
+    screenWidget: const MyList(),
+    routePath: MyList.routePath,
+    overlayStyle: SystemUiOverlayStyle.dark,
   ),
   TabItem(
-    screenWidget: const Home(),
-    routePath: '/tabDownload',
-    overlayStyle: SystemUiOverlayStyle.light,
+    screenWidget: const Download(),
+    routePath: Download.routePath,
+    overlayStyle: SystemUiOverlayStyle.dark,
   ),
   TabItem(
     screenWidget: const Profile(),

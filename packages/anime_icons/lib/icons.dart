@@ -45,4 +45,11 @@ class AnimeIcons {
   static const moreCircle = AnimeIcons._('More_Circle');
 
   static const heartBold = AnimeIcons._('Bold_Heart');
+
+  static const infoSquare = AnimeIcons._('Info_Square');
+  static const moreSquare = AnimeIcons._('More_Square');
+  static const shieldDone = AnimeIcons._('Shield_Done');
+  static const show = AnimeIcons._('show');
+  static const logout = AnimeIcons._('Logout');
+  static const editSquareBold = AnimeIcons._('Bold_Edit_Square');
 }
