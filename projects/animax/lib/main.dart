@@ -1,7 +1,7 @@
 import 'package:animax/screens/detail.dart';
 import 'package:animax/screens/episode_release.dart';
+import 'package:animax/screens/home.dart';
 import 'package:animax/screens/player.dart';
-import 'package:animax/screens/profile.dart';
 import 'package:animax/screens/tab_box.dart';
 import 'package:animax/screens/top_hits.dart';
 import 'package:animax/screens/welcome.dart';
@@ -50,10 +50,14 @@ class AppWithRoutes extends StatelessWidget {
       ),
       GoRoute(
         path: AnimePlayer.routePath,
-        builder: ((context, state) => const AnimePlayer(
-              videoUrl:
-                  'https://v6-default.ixigua.com/51d1db8bf0681e23d739bb25d5c678ac/62e8802a/video/tos/cn/tos-cn-ve-0030/141db20233d44b7da9ff6a9bcd72b8e3/?www.nftvio.com&filename=720P.mp4',
-            )),
+        builder: (context, GoRouterState state) {
+          final String animeId = state.queryParams['animeId']!;
+          final String index = state.queryParams['index']!;
+          return AnimePlayer(
+            animeId: animeId,
+            index: index,
+          );
+        },
       ),
       GoRoute(
         path: TopHits.routePath,
@@ -64,6 +68,6 @@ class AppWithRoutes extends StatelessWidget {
         builder: ((context, state) => const EpisodeRelease()),
       ),
     ],
-    initialLocation: Profile.routePath,
+    initialLocation: Home.routePath,
   );
 }

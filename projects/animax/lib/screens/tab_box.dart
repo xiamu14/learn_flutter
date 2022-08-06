@@ -85,6 +85,12 @@ class _TabBoxState extends State<TabBox> {
 
   @override
   Widget build(BuildContext context) {
+    if (Theme.of(context).platform == TargetPlatform.android) {
+      // android 平台
+      SystemUiOverlayStyle style =
+          const SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+      SystemChrome.setSystemUIOverlayStyle(style);
+    }
     return AnnotatedRegion(
       value: tabs[_navCurrentIndex].overlayStyle,
       child: Scaffold(

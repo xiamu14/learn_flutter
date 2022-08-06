@@ -1,5 +1,6 @@
 import 'package:animax/widgets/anime_card_list.dart';
 import 'package:animax/widgets/home_head_banner.dart';
+
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -40,6 +41,9 @@ class Home extends StatelessWidget {
                 ],
               ),
             ),
+          ),
+          const SizedBox(
+            height: 20,
           ),
         ],
       ),

@@ -35,6 +35,7 @@ Episode _$EpisodeFromJson(Map<String, dynamic> json) => Episode(
       json['animeId'] as int,
       json['index'] as int,
       json['cover'] as String,
+      json['videoUrl'] as String,
     );
 
 Map<String, dynamic> _$EpisodeToJson(Episode instance) => <String, dynamic>{
@@ -42,6 +43,7 @@ Map<String, dynamic> _$EpisodeToJson(Episode instance) => <String, dynamic>{
       'animeId': instance.animeId,
       'index': instance.index,
       'cover': instance.cover,
+      'videoUrl': instance.videoUrl,
     };
 
 AnimeWithEpisode _$AnimeWithEpisodeFromJson(Map<String, dynamic> json) =>

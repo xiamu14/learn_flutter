@@ -6,7 +6,11 @@ final dioClient = DioClient();
 class AnimeApi {
   static Future<Anime> getAnimePopular() async {
     var response = await dioClient.get('/anime/popular');
+
+    print(response.toString());
+
     Anime result = Anime.fromJson(response.data);
+
     return result;
   }
 

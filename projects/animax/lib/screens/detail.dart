@@ -23,21 +23,22 @@ class AnimeDetail extends StatefulWidget {
 }
 
 class _AnimeDetailState extends State<AnimeDetail> {
-  Future<AnimeWithEpisode> fetchAnime() async {
-    return AnimeApi.getAnimeById(2);
+  Future<AnimeWithEpisode> fetchAnime(int id) async {
+    return AnimeApi.getAnimeById(id);
   }
 
   @override
   Widget build(BuildContext context) {
     final sw = MediaQuery.of(context).size.width;
     final sh = MediaQuery.of(context).size.height;
+
     return AnnotatedRegion(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
         body: Stack(
           children: [
             FutureBuilder(
-                future: fetchAnime(),
+                future: fetchAnime(4),
                 builder: (context, AsyncSnapshot<AnimeWithEpisode> snapshot) {
                   if (snapshot.hasData) {
                     final data = snapshot.data!;

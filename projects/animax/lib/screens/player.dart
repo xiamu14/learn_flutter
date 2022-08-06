@@ -1,14 +1,17 @@
 import 'package:animax/screens/home.dart';
 import 'package:animax/utils/format_duration.dart';
+import 'package:anime_api/api/anime.dart';
 import 'package:auto_orientation/auto_orientation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:video_player/video_player.dart';
 
 class AnimePlayer extends StatefulWidget {
-  const AnimePlayer({Key? key, required this.videoUrl}) : super(key: key);
+  const AnimePlayer({Key? key, required this.animeId, required this.index})
+      : super(key: key);
 
-  final String videoUrl;
+  final String animeId;
+  final String index;
 
   static String routePath = '/animePlayer';
 
@@ -18,7 +21,7 @@ class AnimePlayer extends StatefulWidget {
 
 class _AnimePlayerState extends State<AnimePlayer> {
   late VideoPlayerController _controller;
-  late Future<void> _initializeVideoPlayerFuture;
+  Future<void>? _initializeVideoPlayerFuture;
   bool _isFullScreen = false;
   bool _isControlBarVisible = true;
   String _videoPosition = '00:00'; // 视频播放位置显示
@@ -43,12 +46,21 @@ class _AnimePlayerState extends State<AnimePlayer> {
 
   @override
   void initState() {
-    super.initState();
-    _controller = VideoPlayerController.network(
-      widget.videoUrl,
-    )..addListener(_videoListener);
+    AnimeApi.getAnimeById(int.parse(widget.animeId)).then((anime) {
+      if (anime.episodes.isNotEmpty) {
+        final episode = anime.episodes
+            .firstWhere((element) => element.index == int.parse(widget.index));
+        _controller = VideoPlayerController.network(
+          episode.videoUrl,
+        )..addListener(_videoListener);
 
-    _initializeVideoPlayerFuture = _controller.initialize();
+        _initializeVideoPlayerFuture = _controller.initialize();
+
+        setState(() {});
+      }
+    });
+
+    super.initState();
 
     ///关闭状态栏，与底部虚拟操作按钮
   }
@@ -65,6 +77,21 @@ class _AnimePlayerState extends State<AnimePlayer> {
   @override
   Widget build(BuildContext context) {
     final sw = MediaQuery.of(context).size.width;
+    print(_initializeVideoPlayerFuture);
+    if (_initializeVideoPlayerFuture == null) {
+      return Scaffold(
+        backgroundColor: Colors.black87,
+        body: Center(
+          child: SizedBox(
+              width: 100,
+              height: 100,
+              child: CircularProgressIndicator(
+                // backgroundColor: Colors.transparent,
+                color: Theme.of(context).primaryColor,
+              )),
+        ),
+      );
+    }
     return Scaffold(
       body: GestureDetector(
         onTap: () {

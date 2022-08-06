@@ -38,12 +38,14 @@ class Episode {
   int animeId;
   int index;
   String cover;
+  String videoUrl;
 
   Episode(
     this.id,
     this.animeId,
     this.index,
     this.cover,
+    this.videoUrl,
   );
 
   factory Episode.fromJson(Map<String, dynamic> srcJson) =>

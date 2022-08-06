@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 class DioClient {
   final Dio _dio = Dio();
 
-  final _baseUrl = 'http://localhost:3000';
+  final _baseUrl = 'https://animaxapi.oneeeday.work';
 
   DioClient._internal();
 
