@@ -1,7 +1,10 @@
 import 'package:animax/screens/detail.dart';
+import 'package:animax/screens/edit_profile.dart';
 import 'package:animax/screens/episode_release.dart';
-import 'package:animax/screens/home.dart';
+import 'package:animax/screens/init_setting.dart';
 import 'package:animax/screens/player.dart';
+import 'package:animax/screens/profile.dart';
+import 'package:animax/screens/sign.dart';
 import 'package:animax/screens/tab_box.dart';
 import 'package:animax/screens/top_hits.dart';
 import 'package:animax/screens/welcome.dart';
@@ -37,6 +40,18 @@ class AppWithRoutes extends StatelessWidget {
         builder: ((context, state) => const Welcome()),
       ),
       GoRoute(
+        path: Sign.routePath,
+        builder: ((context, state) => const Sign()),
+      ),
+      GoRoute(
+        path: InitSetting.routePath,
+        builder: ((context, state) => const InitSetting()),
+      ),
+      GoRoute(
+        path: EditProfile.routePath,
+        builder: ((context, state) => const EditProfile()),
+      ),
+      GoRoute(
         path:
             '/:screen(tabHome|tabProfile|tabMyList|tabDownload|tabReleaseCalendar)', // don't dynamic
         builder: (BuildContext context, GoRouterState state) {
@@ -68,6 +83,6 @@ class AppWithRoutes extends StatelessWidget {
         builder: ((context, state) => const EpisodeRelease()),
       ),
     ],
-    initialLocation: Home.routePath,
+    initialLocation: EditProfile.routePath,
   );
 }

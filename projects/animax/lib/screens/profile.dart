@@ -1,3 +1,4 @@
+import 'package:animax/widgets/avatar.dart';
 import 'package:animax/widgets/custom_app_bar.dart';
 import 'package:anime_icons/anime_icons.dart';
 import 'package:flutter/material.dart';
@@ -49,36 +50,9 @@ class Profile extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Stack(
-                        children: [
-                          const CircleAvatar(
-                            radius: 40,
-                            backgroundImage:
-                                AssetImage('assets/images/avatar_0.png'),
-                          ),
-                          Positioned(
-                            right: 0,
-                            bottom: 0,
-                            child: Stack(children: [
-                              const Positioned.fill(
-                                child: Padding(
-                                  padding: EdgeInsets.all(6.0),
-                                  child: ColoredBox(
-                                    color: Colors.white,
-                                    child: SizedBox(
-                                      width: 12,
-                                      height: 12,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              AnimeIcon(
-                                AnimeIcons.editSquareBold,
-                                color: Theme.of(context).primaryColor,
-                              ),
-                            ]),
-                          ),
-                        ],
+                      const Avatar(
+                        size: 80,
+                        image: 'assets/images/avatar_0.png',
                       ),
                       const SizedBox(
                         width: 24,

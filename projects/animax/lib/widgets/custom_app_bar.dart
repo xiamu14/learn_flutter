@@ -6,12 +6,12 @@ class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
     Key? key,
     this.leadingBack = false,
+    this.iconName,
     required this.title,
-    required this.iconName,
   }) : super(key: key);
 
   final String title;
-  final AnimeIcons iconName;
+  final AnimeIcons? iconName;
   final bool leadingBack;
 
   @override
@@ -58,11 +58,13 @@ class CustomAppBar extends StatelessWidget {
               ),
             ),
           ),
-          AnimeIcon(
-            iconName,
-            color: const Color(0xff212121),
-            size: 22,
-          ),
+          iconName != null
+              ? AnimeIcon(
+                  iconName!,
+                  color: const Color(0xff212121),
+                  size: 22,
+                )
+              : Container(),
         ],
       ),
     );
