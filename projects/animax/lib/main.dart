@@ -62,7 +62,12 @@ class AppWithRoutes extends StatelessWidget {
       ),
       GoRoute(
         path: AnimeDetail.routePath,
-        builder: ((context, state) => const AnimeDetail()),
+        builder: (context, state) {
+          final String animeId = state.queryParams['animeId']!;
+          return AnimeDetail(
+            animeId: animeId,
+          );
+        },
       ),
       GoRoute(
         path: AnimePlayer.routePath,

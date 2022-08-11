@@ -53,42 +53,6 @@ class _HomeHeadBannerState extends State<HomeHeadBanner> {
               }
               return Container();
             }),
-        Container(
-          width: sw,
-          height: sh * 0.12,
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xff181a20), Color.fromRGBO(24, 26, 0, 0)],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-          ),
-          child: Align(
-            alignment: const Alignment(0, 0.65),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30.0),
-              child: Row(
-                children: [
-                  Image.asset(
-                    'assets/images/logo.png',
-                    width: 32.0,
-                    height: 32.0,
-                  ),
-                  const Spacer(),
-                  const AnimeIcon(
-                    AnimeIcons.search,
-                    color: Colors.white,
-                  ),
-                  const SizedBox(width: 12),
-                  const AnimeIcon(
-                    AnimeIcons.notification,
-                    color: Colors.white,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
         FutureBuilder<Anime>(
             future: _futureFetchAnimePopular,
             builder: (context, snapshot) {
@@ -143,7 +107,9 @@ class _HomeHeadBannerState extends State<HomeHeadBanner> {
                           ),
                           Row(
                             children: [
-                              const ButtonPlay(),
+                              ButtonPlay(
+                                animeId: data.id.toString(),
+                              ),
                               const SizedBox(width: 12),
                               GestureDetector(
                                 onTap: () {},
@@ -188,13 +154,16 @@ class _HomeHeadBannerState extends State<HomeHeadBanner> {
 class ButtonPlay extends StatelessWidget {
   const ButtonPlay({
     Key? key,
+    required this.animeId,
   }) : super(key: key);
+
+  final String animeId;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).push(AnimeDetail.routePath);
+        GoRouter.of(context).push('${AnimeDetail.routePath}?animeId=$animeId');
       },
       child: Container(
         // width: 84,

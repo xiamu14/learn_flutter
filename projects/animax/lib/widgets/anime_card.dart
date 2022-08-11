@@ -1,14 +1,17 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class AnimeCard extends StatelessWidget {
   const AnimeCard({
     Key? key,
+    this.score = 9.0,
     this.height = 200,
     this.width = 150,
     required this.image,
   }) : super(key: key);
 
   final String image;
+  final double? score;
   final double? height;
   final double? width;
 
@@ -21,7 +24,7 @@ class AnimeCard extends StatelessWidget {
         // border: Border.all(color: Colors.red),
         borderRadius: BorderRadius.circular(8),
         image: DecorationImage(
-          image: AssetImage(image),
+          image: getImage(image),
           fit: BoxFit.cover,
         ),
       ),
@@ -39,9 +42,9 @@ class AnimeCard extends StatelessWidget {
                 color: Theme.of(context).primaryColor,
                 borderRadius: BorderRadius.circular(6),
               ),
-              child: const Text(
-                '9.0',
-                style: TextStyle(
+              child: Text(
+                score.toString(),
+                style: const TextStyle(
                   color: Colors.white,
                 ),
               ),
@@ -50,5 +53,12 @@ class AnimeCard extends StatelessWidget {
         )
       ]),
     );
+  }
+
+  ImageProvider<Object> getImage(String url) {
+    final result = url.contains('http')
+        ? CachedNetworkImageProvider(url)
+        : AssetImage(url);
+    return result as ImageProvider<Object>;
   }
 }

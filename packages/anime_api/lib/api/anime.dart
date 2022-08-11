@@ -20,4 +20,16 @@ class AnimeApi {
     AnimeWithEpisode result = AnimeWithEpisode.fromJson(response.data);
     return result;
   }
+
+  static Future<List<AnimeWithEpisode>> getAnimeList() async {
+    var response = await dioClient.get('/anime/list');
+
+    print(response.data);
+
+    List<AnimeWithEpisode> result = (response.data as List<dynamic>)
+        .map((item) => AnimeWithEpisode.fromJson(item))
+        .toList();
+
+    return result;
+  }
 }

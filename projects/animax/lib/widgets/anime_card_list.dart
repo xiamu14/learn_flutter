@@ -1,15 +1,19 @@
+import 'package:animax/screens/detail.dart';
 import 'package:animax/widgets/anime_card.dart';
+import 'package:anime_api/model/anime.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class AnimeCardList extends StatelessWidget {
-  const AnimeCardList({Key? key, required this.title}) : super(key: key);
+  const AnimeCardList({Key? key, required this.title, required this.list})
+      : super(key: key);
 
   final String title;
+  final List<AnimeWithEpisode> list;
 
   @override
   Widget build(BuildContext context) {
     final sw = MediaQuery.of(context).size.width;
-    final sh = MediaQuery.of(context).size.height;
     return Column(children: [
       const SizedBox(
         height: 8,
@@ -49,18 +53,27 @@ class AnimeCardList extends StatelessWidget {
         height: 200,
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: ListView.builder(
-            itemCount: 3,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: ((context, index) {
-              return Row(
-                children: [
-                  AnimeCard(image: 'assets/poster/00${index + 1}_1.jpeg'),
-                  const SizedBox(
-                    width: 12,
-                  )
-                ],
-              );
-            })),
+          itemCount: list.length,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: ((context, index) {
+            return Row(
+              children: [
+                GestureDetector(
+                    onTap: () {
+                      GoRouter.of(context).push(
+                          '${AnimeDetail.routePath}?animeId=${list[index].id}');
+                    },
+                    child: AnimeCard(
+                      image: list[index].cover,
+                      score: list[index].score,
+                    )),
+                const SizedBox(
+                  width: 12,
+                )
+              ],
+            );
+          }),
+        ),
       ),
     ]);
   }

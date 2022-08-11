@@ -14,9 +14,11 @@ import 'dart:ui' as ui;
 import 'package:readmore/readmore.dart';
 
 class AnimeDetail extends StatefulWidget {
-  const AnimeDetail({Key? key}) : super(key: key);
+  const AnimeDetail({Key? key, required this.animeId}) : super(key: key);
 
   static String routePath = '/animeDetail';
+
+  final String animeId;
 
   @override
   State<AnimeDetail> createState() => _AnimeDetailState();
@@ -24,7 +26,7 @@ class AnimeDetail extends StatefulWidget {
 
 class _AnimeDetailState extends State<AnimeDetail> {
   Future<AnimeWithEpisode> fetchAnime(int id) async {
-    return AnimeApi.getAnimeById(id);
+    return AnimeApi.getAnimeById(int.parse(widget.animeId));
   }
 
   @override
@@ -62,14 +64,16 @@ class _AnimeDetailState extends State<AnimeDetail> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Expanded(
-                                    child: Text(
-                                  data.name,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: GoogleFonts.urbanist(
+                                  child: Text(
+                                    data.name,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: GoogleFonts.urbanist(
                                       textStyle: const TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 24)),
-                                )),
+                                          fontSize: 24),
+                                    ),
+                                  ),
+                                ),
                                 const SizedBox(
                                   width: 30,
                                 ),
