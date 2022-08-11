@@ -24,7 +24,8 @@ class _AnimePlayerState extends State<AnimePlayer> {
   Future<void>? _initializeVideoPlayerFuture;
   bool _isFullScreen = false;
   bool _isControlBarVisible = true;
-  String _videoPosition = '00:00'; // 视频播放位置显示
+  String _videoPosition = '00:00';
+  String title = ''; // 视频播放位置显示
 
   void _videoListener() async {
     if (!_controller.value.hasError) {
@@ -55,9 +56,9 @@ class _AnimePlayerState extends State<AnimePlayer> {
         )..addListener(_videoListener);
 
         _initializeVideoPlayerFuture = _controller.initialize();
-
-        setState(() {});
       }
+      title = '${anime.name} - ${widget.index}';
+      setState(() {});
     });
 
     super.initState();
@@ -171,9 +172,9 @@ class _AnimePlayerState extends State<AnimePlayer> {
                               icon: const Icon(Icons.arrow_back_ios),
                               color: Colors.white,
                             ),
-                            const Text(
-                              'Demon Slayer',
-                              style: TextStyle(
+                            Text(
+                              title,
+                              style: const TextStyle(
                                 color: Colors.white,
                                 // fontWeight: FontWeight.bold,
                                 fontSize: 18,

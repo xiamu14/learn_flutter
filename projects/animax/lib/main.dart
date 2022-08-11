@@ -1,6 +1,7 @@
 import 'package:animax/screens/detail.dart';
 import 'package:animax/screens/edit_profile.dart';
 import 'package:animax/screens/episode_release.dart';
+import 'package:animax/screens/home.dart';
 import 'package:animax/screens/init_setting.dart';
 import 'package:animax/screens/player.dart';
 import 'package:animax/screens/profile.dart';
@@ -83,6 +84,6 @@ class AppWithRoutes extends StatelessWidget {
         builder: ((context, state) => const EpisodeRelease()),
       ),
     ],
-    initialLocation: EditProfile.routePath,
+    initialLocation: Home.routePath,
   );
 }

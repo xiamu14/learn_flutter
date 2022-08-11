@@ -1,6 +1,7 @@
 import 'package:animax/screens/player.dart';
 import 'package:anime_api/model/anime.dart';
 import 'package:anime_icons/anime_icons.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -72,7 +73,7 @@ class EpisodeCardList extends StatelessWidget {
                         // border: Border.all(color: Colors.red),
                         borderRadius: BorderRadius.circular(8),
                         image: DecorationImage(
-                          image: NetworkImage(list[index].cover),
+                          image: CachedNetworkImageProvider(list[index].cover),
                           fit: BoxFit.cover,
                         ),
                       ),

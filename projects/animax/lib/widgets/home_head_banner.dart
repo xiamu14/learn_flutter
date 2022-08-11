@@ -3,6 +3,7 @@ import 'package:animax/screens/player.dart';
 import 'package:anime_api/anime_api.dart';
 import 'package:anime_api/model/anime.dart';
 import 'package:anime_icons/anime_icons.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -42,7 +43,10 @@ class _HomeHeadBannerState extends State<HomeHeadBanner> {
                   height: sh * 0.4,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                    image: NetworkImage(data.cover),
+                    // image: NetworkImage(data.cover),
+                    image: CachedNetworkImageProvider(
+                      data.cover,
+                    ),
                     fit: BoxFit.cover,
                   )),
                 );
