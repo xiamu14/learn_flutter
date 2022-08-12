@@ -4,6 +4,8 @@ import 'package:anime_icons/anime_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../widgets/avatar_picker.dart';
+
 enum ActionType { common, logout, darkMode, language }
 
 class ActionItem {
@@ -50,9 +52,9 @@ class Profile extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const Avatar(
+                      const AvatarPicker(
                         size: 80,
-                        image: 'assets/images/avatar_0.png',
+                        defaultImage: AssetImage('assets/images/avatar_0.png'),
                       ),
                       const SizedBox(
                         width: 24,

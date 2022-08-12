@@ -1,5 +1,9 @@
+import 'package:animax/screens/home.dart';
+import 'package:animax/screens/sign.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Welcome extends StatefulWidget {
@@ -13,6 +17,31 @@ class Welcome extends StatefulWidget {
 
 class _WelcomeState extends State<Welcome> {
   final _pageController = PageController();
+  late SharedPreferences sharedPref;
+
+  @override
+  void initState() {
+    super.initState();
+
+    SharedPreferences.getInstance().then((value) {
+      sharedPref = value;
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  void handleNext(BuildContext context) {
+    final signInfo = sharedPref.getString('signInfo');
+    if (signInfo != null) {
+      print(signInfo);
+      GoRouter.of(context).push(Home.routePath);
+    } else {
+      GoRouter.of(context).push(Sign.routePath);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +55,6 @@ class _WelcomeState extends State<Welcome> {
             SizedBox(
               width: sw,
               height: sh,
-              // child: const Image(
-              //   image: AssetImage('assets/images/welcome_background.png'),
-              //   fit: BoxFit.cover,
-              // )
-
               child: PageView(
                 scrollDirection: Axis.horizontal,
                 controller: _pageController,
@@ -74,7 +98,9 @@ class _WelcomeState extends State<Welcome> {
                     height: 24,
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      handleNext(context);
+                    },
                     child: Container(
                       width: 360,
                       height: 58,

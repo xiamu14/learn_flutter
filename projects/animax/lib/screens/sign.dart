@@ -7,6 +7,7 @@ import 'package:anime_icons/anime_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Sign extends StatefulWidget {
   const Sign({Key? key}) : super(key: key);
@@ -24,17 +25,36 @@ class _SignState extends State<Sign> {
   var formValues = {};
   late FocusNode emailFocusNode;
   var pageType = PageType.signUp;
+  late SharedPreferences sharedPref;
 
   @override
   void initState() {
     super.initState();
     emailFocusNode = FocusNode();
+    SharedPreferences.getInstance().then((value) {
+      sharedPref = value;
+    });
   }
 
   @override
   void dispose() {
     super.dispose();
     emailFocusNode.dispose();
+  }
+
+  void handleSign(BuildContext context) {
+    if (formKey.currentState!.validate()) {
+      print(formValues.toString());
+      sharedPref.setString('signInfo', formValues.toString()).then((value) {
+        if (pageType == PageType.signIn) {
+          GoRouter.of(context).go(Home.routePath);
+        } else {
+          GoRouter.of(context).go(InitSetting.routePath);
+        }
+      });
+    } else {
+      print('some error');
+    }
   }
 
   @override
@@ -80,16 +100,7 @@ class _SignState extends State<Sign> {
                     Button(
                       text: pageType == PageType.signIn ? 'Sign in' : 'Sign up',
                       onTap: () {
-                        if (formKey.currentState!.validate()) {
-                          print(formValues.toString());
-                          if (pageType == PageType.signIn) {
-                            GoRouter.of(context).go(Home.routePath);
-                          } else {
-                            GoRouter.of(context).go(InitSetting.routePath);
-                          }
-                        } else {
-                          print('some error');
-                        }
+                        handleSign(context);
                       },
                       color: Theme.of(context).primaryColor,
                       height: 58,

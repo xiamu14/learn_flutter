@@ -8,7 +8,7 @@ class Avatar extends StatelessWidget {
     required this.size,
   }) : super(key: key);
 
-  final String? image;
+  final ImageProvider? image;
   final double size;
 
   @override
@@ -18,7 +18,7 @@ class Avatar extends StatelessWidget {
         image != null
             ? CircleAvatar(
                 radius: size / 2,
-                backgroundImage: AssetImage(image!),
+                backgroundImage: image,
               )
             : Container(
                 width: size,

@@ -7,7 +7,10 @@ import 'package:google_fonts/google_fonts.dart';
 class InitBottomButton extends StatelessWidget {
   const InitBottomButton({
     Key? key,
+    required this.onSubmit,
   }) : super(key: key);
+
+  final void Function() onSubmit;
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +28,7 @@ class InitBottomButton extends StatelessWidget {
           flex: 1,
           child: Button(
             color: Theme.of(context).primaryColor,
-            onTap: () {
-              // switch widget
-            },
+            onTap: onSubmit,
             text: 'Continue',
             height: 58,
           ),

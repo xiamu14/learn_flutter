@@ -1,8 +1,8 @@
 import 'package:animax/screens/home.dart';
 import 'package:animax/utils/format_duration.dart';
 import 'package:anime_api/api/anime.dart';
-import 'package:auto_orientation/auto_orientation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:video_player/video_player.dart';
 
@@ -22,7 +22,7 @@ class AnimePlayer extends StatefulWidget {
 class _AnimePlayerState extends State<AnimePlayer> {
   late VideoPlayerController _controller;
   Future<void>? _initializeVideoPlayerFuture;
-  bool _isFullScreen = false;
+  bool _isFullScreen = true;
   bool _isControlBarVisible = true;
   String _videoPosition = '00:00';
   String title = ''; // 视频播放位置显示
@@ -47,6 +47,11 @@ class _AnimePlayerState extends State<AnimePlayer> {
 
   @override
   void initState() {
+    // 强制竖屏
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
     AnimeApi.getAnimeById(int.parse(widget.animeId)).then((anime) {
       if (anime.episodes.isNotEmpty) {
         final episode = anime.episodes
@@ -71,6 +76,11 @@ class _AnimePlayerState extends State<AnimePlayer> {
     _controller.removeListener(_videoListener);
     // Ensure disposing of the VideoPlayerController to free up resources.
     _controller.dispose();
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
 
     super.dispose();
   }
@@ -266,19 +276,20 @@ class _AnimePlayerState extends State<AnimePlayer> {
                                 _controller.value.duration),
                             style: const TextStyle(color: Colors.white),
                           ),
-                          IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  _isFullScreen = !_isFullScreen;
-                                });
-                                AutoOrientation.landscapeAutoMode();
-                              },
-                              icon: Icon(
-                                _isFullScreen
-                                    ? Icons.fullscreen
-                                    : Icons.fullscreen_exit,
-                                color: Colors.white,
-                              ))
+                          // IconButton(
+                          //   onPressed: () {
+                          //     setState(() {
+                          //       _isFullScreen = !_isFullScreen;
+                          //     });
+                          //     AutoOrientation.landscapeAutoMode();
+                          //   },
+                          //   icon: Icon(
+                          //     _isFullScreen
+                          //         ? Icons.fullscreen
+                          //         : Icons.fullscreen_exit,
+                          //     color: Colors.white,
+                          //   ),
+                          // )
                         ],
                       ),
                     ),

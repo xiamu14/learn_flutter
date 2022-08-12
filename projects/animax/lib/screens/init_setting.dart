@@ -1,3 +1,4 @@
+import 'package:animax/model/user_info.dart';
 import 'package:animax/screens/edit_profile.dart';
 import 'package:animax/widgets/button.dart';
 import 'package:animax/widgets/custom_app_bar.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class InitSetting extends StatelessWidget {
   const InitSetting({Key? key}) : super(key: key);
@@ -38,9 +40,15 @@ class InitSetting extends StatelessWidget {
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24),
-              child: InitBottomButton(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Consumer<Interests>(builder: (context, provider, child) {
+                return InitBottomButton(
+                  onSubmit: () {
+                    print(provider.list.toString());
+                  },
+                );
+              }),
             ),
             const SizedBox(
               height: 24,

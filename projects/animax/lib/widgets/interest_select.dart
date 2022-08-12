@@ -1,8 +1,10 @@
+import 'package:animax/model/user_info.dart';
 import 'package:animax/screens/edit_profile.dart';
 import 'package:animax/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 const interestOptions = [
   'Action',
@@ -19,7 +21,6 @@ const interestOptions = [
   'Shoujo',
   'Fantasy',
   'Mytery',
-  'Mecha',
   'Vampire'
 ];
 
@@ -42,31 +43,32 @@ class InterestSelect extends StatelessWidget {
   }
 }
 
-class Interest extends StatefulWidget {
+class Interest extends StatelessWidget {
   const Interest({Key? key, required this.text}) : super(key: key);
 
   final String text;
-  @override
-  State<Interest> createState() => _InterestState();
-}
-
-class _InterestState extends State<Interest> {
-  bool isSelected = false;
 
   @override
   Widget build(BuildContext context) {
     return UnconstrainedBox(
       constrainedAxis: Axis.vertical,
-      child: Button(
-        text: widget.text,
-        height: 45,
-        onTap: () {
-          setState(() {
-            isSelected = !isSelected;
-          });
+      child: Consumer<Interests>(
+        builder: (context, provider, child) {
+          final isSelected = provider.isSelected(text);
+          return Button(
+            text: text,
+            height: 45,
+            onTap: () {
+              if (isSelected) {
+                provider.removeInterest(text);
+              } else {
+                provider.addInterest(text);
+              }
+            },
+            color: Theme.of(context).primaryColor,
+            solid: isSelected,
+          );
         },
-        color: Theme.of(context).primaryColor,
-        solid: isSelected,
       ),
     );
   }

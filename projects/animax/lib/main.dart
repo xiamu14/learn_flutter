@@ -1,3 +1,4 @@
+import 'package:animax/model/user_info.dart';
 import 'package:animax/screens/detail.dart';
 import 'package:animax/screens/edit_profile.dart';
 import 'package:animax/screens/episode_release.dart';
@@ -10,9 +11,16 @@ import 'package:animax/screens/tab_box.dart';
 import 'package:animax/screens/top_hits.dart';
 import 'package:animax/screens/welcome.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp(AppWithRoutes());
 }
 
@@ -21,15 +29,18 @@ class AppWithRoutes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routeInformationProvider: _router.routeInformationProvider,
-      routeInformationParser: _router.routeInformationParser,
-      routerDelegate: _router.routerDelegate,
-      title: 'Animax',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: const Color(0xff06C149),
-        brightness: Brightness.light,
+    return ChangeNotifierProvider<Interests>(
+      create: (ctx) => Interests(),
+      child: MaterialApp.router(
+        routeInformationProvider: _router.routeInformationProvider,
+        routeInformationParser: _router.routeInformationParser,
+        routerDelegate: _router.routerDelegate,
+        title: 'Animax',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primaryColor: const Color(0xff06C149),
+          brightness: Brightness.light,
+        ),
       ),
     );
   }
@@ -89,6 +100,6 @@ class AppWithRoutes extends StatelessWidget {
         builder: ((context, state) => const EpisodeRelease()),
       ),
     ],
-    initialLocation: Home.routePath,
+    initialLocation: InitSetting.routePath,
   );
 }

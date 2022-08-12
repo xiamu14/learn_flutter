@@ -1,4 +1,5 @@
 import 'package:animax/widgets/avatar.dart';
+import 'package:animax/widgets/avatar_picker.dart';
 import 'package:animax/widgets/custom_app_bar.dart';
 import 'package:animax/widgets/init_bottom_button.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class _EditProfileState extends State<EditProfile> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Column(children: [
-                    const Avatar(size: 100),
+                    const AvatarPicker(size: 100),
                     const SizedBox(
                       height: 24,
                     ),
@@ -62,9 +63,11 @@ class _EditProfileState extends State<EditProfile> {
                   ]),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24),
-                child: InitBottomButton(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: InitBottomButton(
+                  onSubmit: () {},
+                ),
               ),
               const SizedBox(
                 height: 24,

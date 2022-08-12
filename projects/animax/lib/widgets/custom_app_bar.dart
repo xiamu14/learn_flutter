@@ -1,6 +1,9 @@
 import 'package:anime_icons/anime_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../screens/home.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
@@ -31,7 +34,11 @@ class CustomAppBar extends StatelessWidget {
           leadingBack
               ? GestureDetector(
                   onTap: () {
-                    // GoRouter pop()
+                    if (GoRouter.of(context).canPop()) {
+                      GoRouter.of(context).pop();
+                    } else {
+                      GoRouter.of(context).go(Home.routePath);
+                    }
                   },
                   child: const AnimeIcon(
                     AnimeIcons.arrowLeft,
