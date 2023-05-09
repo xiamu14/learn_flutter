@@ -14,10 +14,30 @@ class TopHits extends StatefulWidget {
 }
 
 class _TopHitsState extends State<TopHits> {
+  final ScrollController _scrollController = ScrollController(); //listview的控制器
+  int count = 4;
+
+  @override
+  initState() {
+    super.initState();
+
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        print('滑动到了最底部');
+        if (count < 12) {
+          count += 2;
+          setState(() {});
+        }
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // final sw = MediaQuery.of(context).size.width;
     // final sh = MediaQuery.of(context).size.height;
+    print(count);
     return AnnotatedRegion(
       value: SystemUiOverlayStyle.dark,
       child: Scaffold(
@@ -32,11 +52,17 @@ class _TopHitsState extends State<TopHits> {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: ListView.builder(
-                    itemBuilder: ((context, index) {
-                      return const TopHitsAnimeItem();
-                    }),
-                    itemCount: 3,
+                  child: RefreshIndicator(
+                    onRefresh: () async {
+                      print('下拉刷新');
+                    },
+                    child: ListView.builder(
+                      controller: _scrollController,
+                      itemBuilder: ((context, index) {
+                        return const TopHitsAnimeItem();
+                      }),
+                      itemCount: count,
+                    ),
                   ),
                 ),
               ),

@@ -24,7 +24,7 @@ class AnimeCard extends StatelessWidget {
         // border: Border.all(color: Colors.red),
         borderRadius: BorderRadius.circular(8),
         image: DecorationImage(
-          image: getImage(image),
+          image: renderImage(image),
           fit: BoxFit.cover,
         ),
       ),
@@ -55,7 +55,7 @@ class AnimeCard extends StatelessWidget {
     );
   }
 
-  ImageProvider<Object> getImage(String url) {
+  ImageProvider<Object> renderImage(String url) {
     final result = url.contains('http')
         ? CachedNetworkImageProvider(url)
         : AssetImage(url);

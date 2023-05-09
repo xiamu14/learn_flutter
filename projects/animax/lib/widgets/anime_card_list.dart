@@ -5,11 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class AnimeCardList extends StatelessWidget {
-  const AnimeCardList({Key? key, required this.title, required this.list})
+  const AnimeCardList(
+      {Key? key,
+      required this.title,
+      required this.list,
+      required this.goSeeAll})
       : super(key: key);
 
   final String title;
   final List<AnimeWithEpisode> list;
+  final void Function() goSeeAll;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +37,7 @@ class AnimeCardList extends StatelessWidget {
               ),
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: goSeeAll,
               child: Text(
                 'See all',
                 style: TextStyle(

@@ -1,3 +1,5 @@
+import 'package:animax/screens/episode_release.dart';
+import 'package:animax/screens/top_hits.dart';
 import 'package:animax/widgets/anime_card_list.dart';
 import 'package:animax/widgets/home_head_banner.dart';
 import 'package:anime_api/anime_api.dart';
@@ -5,6 +7,7 @@ import 'package:anime_api/model/anime.dart';
 import 'package:anime_icons/anime_icons.dart';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -52,6 +55,9 @@ class _HomeState extends State<Home> {
                             future: _futureFetchAnimeList,
                             builder: (context, snapshot) {
                               return AnimeCardList(
+                                goSeeAll: () {
+                                  GoRouter.of(context).push(TopHits.routePath);
+                                },
                                 title: 'Top Hits Anime',
                                 list: snapshot.hasData ? snapshot.data! : [],
                               );
@@ -65,6 +71,10 @@ class _HomeState extends State<Home> {
                             future: _futureFetchAnimeList,
                             builder: (context, snapshot) {
                               return AnimeCardList(
+                                goSeeAll: () {
+                                  GoRouter.of(context)
+                                      .push(EpisodeRelease.routePath);
+                                },
                                 title: 'New Episode Releases',
                                 list: snapshot.hasData ? snapshot.data! : [],
                               );

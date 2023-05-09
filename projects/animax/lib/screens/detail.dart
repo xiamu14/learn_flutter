@@ -77,7 +77,20 @@ class _AnimeDetailState extends State<AnimeDetail> {
                                 const SizedBox(
                                   width: 30,
                                 ),
-                                const AnimeIcon(AnimeIcons.send),
+                                GestureDetector(
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                      context: context,
+                                      backgroundColor: Colors.transparent,
+                                      barrierColor: const Color(0xff09101D)
+                                          .withOpacity(0.7),
+                                      builder: (context) {
+                                        return const ShareModal();
+                                      },
+                                    );
+                                  },
+                                  child: const AnimeIcon(AnimeIcons.send),
+                                ),
                               ],
                             ),
                             const SizedBox(
@@ -131,9 +144,10 @@ class _AnimeDetailState extends State<AnimeDetail> {
                                               width: 12,
                                             ),
                                             Tag(
-                                                text: e,
-                                                color: Theme.of(context)
-                                                    .primaryColor),
+                                              text: e,
+                                              color: Theme.of(context)
+                                                  .primaryColor,
+                                            ),
                                           ],
                                         ),
                                       )
@@ -247,6 +261,109 @@ class _AnimeDetailState extends State<AnimeDetail> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+final TextStyle appNameStyle = GoogleFonts.urbanist(
+  textStyle: const TextStyle(
+    fontSize: 12,
+    color: Color(0xff212121),
+  ),
+);
+
+final List<List<Map<String, String>>> apps = [
+  [
+    {'name': 'WhatsApp', 'asset': 'assets/images/whatsapp.png'},
+    {'name': 'Twitter', 'asset': 'assets/images/twitter.png'},
+    {'name': 'Facebook', 'asset': 'assets/images/facebook.png'},
+    {'name': 'Instagram', 'asset': 'assets/images/instagram.png'},
+  ],
+  [
+    {'name': 'Yahoo', 'asset': 'assets/images/yahoo.png'},
+    {'name': 'Chat', 'asset': 'assets/images/chat.png'},
+    {'name': 'Wechat', 'asset': 'assets/images/wechat.png'},
+    {'name': 'TikTok', 'asset': 'assets/images/tiktok.png'},
+  ]
+];
+
+class ShareModal extends StatelessWidget {
+  const ShareModal({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(40), topLeft: Radius.circular(40)),
+      ),
+      padding: const EdgeInsets.symmetric(
+        vertical: 35,
+        horizontal: 24,
+      ),
+      height: 348,
+      child: Column(
+        children: [
+          Text(
+            'Share to',
+            style: GoogleFonts.urbanist(
+              textStyle: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 12,
+          ),
+          const Divider(
+            color: Color(0xffe3e3e3),
+          ),
+          const SizedBox(
+            height: 12,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 18.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: apps
+                  .map(
+                    (appRow) => Padding(
+                      padding: const EdgeInsets.only(bottom: 18.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: appRow
+                            .map(
+                              (e) => Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image(
+                                    image: AssetImage(e['asset'] ?? ''),
+                                    width: 60,
+                                    height: 60,
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  Text(
+                                    e['name'] ?? '',
+                                    style: appNameStyle,
+                                  ),
+                                ],
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          )
+        ],
       ),
     );
   }

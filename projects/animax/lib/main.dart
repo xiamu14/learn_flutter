@@ -100,6 +100,6 @@ class AppWithRoutes extends StatelessWidget {
         builder: ((context, state) => const EpisodeRelease()),
       ),
     ],
-    initialLocation: InitSetting.routePath,
+    initialLocation: Home.routePath,
   );
 }
