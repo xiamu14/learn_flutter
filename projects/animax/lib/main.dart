@@ -5,7 +5,7 @@ import 'package:animax/screens/episode_release.dart';
 import 'package:animax/screens/home.dart';
 import 'package:animax/screens/init_setting.dart';
 import 'package:animax/screens/player.dart';
-import 'package:animax/screens/profile.dart';
+// import 'package:animax/screens/profile.dart';
 import 'package:animax/screens/sign.dart';
 import 'package:animax/screens/tab_box.dart';
 import 'package:animax/screens/top_hits.dart';

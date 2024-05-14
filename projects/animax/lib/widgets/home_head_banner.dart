@@ -172,11 +172,11 @@ class ButtonPlay extends StatelessWidget {
           color: Theme.of(context).primaryColor,
           borderRadius: BorderRadius.circular(16),
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 12.0),
           child: Center(
             child: Row(
-              children: const [
+              children: [
                 AnimeIcon(
                   AnimeIcons.playBold,
                   color: Colors.white,
